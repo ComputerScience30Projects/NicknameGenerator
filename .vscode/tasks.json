@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+
+		{
+			"type": "shell",
+			"label": "g++ build",
+			"command":  "/usr/bin/g++",
+			"args": [
+				"-g",
+				"*.cpp",
+				"-o",
+				"nicknameGenerator",
+				"-m64",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		}
+	]
+}
