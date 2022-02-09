@@ -7,11 +7,12 @@
 			"label": "g++ build",
 			"command":  "/usr/bin/g++",
 			"args": [
+				"-std=c++11",
 				"-g",
 				"*.cpp",
 				"-o",
 				"nicknameGenerator",
-				"-m64",
+				"-m64"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
