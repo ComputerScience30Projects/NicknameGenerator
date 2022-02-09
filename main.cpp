@@ -27,22 +27,31 @@ void setName(std::string &firstName, std::string &lastName)
     std::cout << "Name set to " + firstName + " " + lastName << std::endl;
 }
 
-void displayRandomNickname(const std::string nickname, const std::string firstName, const std::string lastName)
+void displayRandomNickname(const std::string nickname, const std::string &firstName, const std::string &lastName)
 {
     /*Print Name*/
     std::cout << std::endl << firstName + " " + nickname + " " + lastName << std::endl;
 }
 
-void addNickname()
-{
-
+void addNickname(std::vector<std::string> &nicknames)
+{   
+    /*Add New Nickname*/
+    std::string text;
+    std::cout << "What nickname should we add?:\n ";
+    std::cin >> text;
+    nicknames.push_back(text);
 }
 
 void removeNickname()
 {
-
+    
 }
 
+void updateNicknames() //WORK ON THIS RNRNRNRNRN
+{
+    /* Opening file without append mode to rewrite data*/
+    std::ofstream file("nicknames.txt");
+}
 
 int main()
 {
@@ -88,6 +97,7 @@ int main()
 
             /*Display All Nicknames*/
             case 3:
+                updateNicknames();
                 break;
 
             /*Add a Nickname*/
