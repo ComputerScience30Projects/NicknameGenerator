@@ -5,13 +5,13 @@
 		{
 			"type": "shell",
 			"label": "g++ build",
-			"command":  "C:/MinGW/bin/g++",
+			"command":  "/usr/bin/g++",
 			"args": [
 				"-std=c++11",
 				"-g",
 				"*.cpp",
 				"-o",
-				"nicknameGenerator.exe"
+				"nicknameGenerator"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

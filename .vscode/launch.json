@@ -5,15 +5,14 @@
             "name": "g++ build and debug",
             "type": "cppdbg",
             "request": "launch",
-            "targetArchitecture": "x86_64",
-            "program": "${workspaceFolder}/nicknameGenerator.exe",
+            "program": "${workspaceFolder}/nicknameGenerator",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
+            "miDebuggerPath": "/usr/bin/gdb",
             "setupCommands": [
                 {
                     "description": "Enably pretty printing",

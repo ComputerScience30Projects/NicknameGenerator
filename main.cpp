@@ -4,9 +4,9 @@
 #include <vector>
 #include <random>
 
-int randomInt(const unsigned int min, const unsigned int max)
+int randomInt(const size_t min, const size_t max)
 {
-    //Seed random number generator
+    /*Seed random number generator*/
     std::random_device rd;
     std::mt19937 mt(rd());
 
@@ -27,19 +27,18 @@ void setName(std::string &firstName, std::string &lastName)
     std::cout << "Name set to " + firstName + " " + lastName << std::endl;
 }
 
-void displayRandomNickname(const std::string nickname, const std::string &firstName, const std::string &lastName)
-{
-    /*Print Name*/
-    std::cout << std::endl << firstName + " " + nickname + " " + lastName << std::endl;
-}
-
 void addNickname(std::vector<std::string> &nicknames)
 {   
     /*Add New Nickname*/
     std::string text;
-    std::cout << "What nickname should we add?:\n ";
+    std::cout << "What nickname should we add: ";
     std::cin >> text;
     nicknames.push_back(text);
+
+    /*Update Nickname File*/
+    std::ofstream nicknamesFile("nicknames.txt", std::ios_base::app);//append
+    nicknamesFile << std::endl << text;
+
 }
 
 void removeNickname()
@@ -47,15 +46,10 @@ void removeNickname()
     
 }
 
-void updateNicknames() //WORK ON THIS RNRNRNRNRN
-{
-    /* Opening file without append mode to rewrite data*/
-    std::ofstream file("nicknames.txt");
-}
 
 int main()
 {
-    unsigned int choice;
+    size_t choice;
 
     std::string firstName = "John";
     std::string lastName = "Doe";
@@ -63,17 +57,17 @@ int main()
     std::string line;
     std::vector<std::string> nicknames;
 
-    unsigned int randInt;
+    size_t randInt;
 
     /*Introduction*/
-    std::cout << "WELCOME TO NICKNAME GENERATOR:\n";
+    std::cout << "--------WELCOME TO NICKNAME GENERATOR--------\n";
 
     /*Mainmenu loop*/
     while (choice != 6)
     {
-        /*Read Nickname File*/
-        std::fstream nicknameFile("nicknames.txt");
-        while (std::getline (nicknameFile, line))
+        /*Read Nickname File and Init Nicknames Array*/
+        std::fstream nicknamesFile("nicknames.txt");
+        while (std::getline (nicknamesFile, line))
         {
             nicknames.push_back(line);
         }
@@ -92,16 +86,20 @@ int main()
             /*Display a Random Nickname*/
             case 2:
                 randInt = randomInt(0, nicknames.size());
-                displayRandomNickname(nicknames[randInt], firstName, lastName);
+                std::cout << std::endl << firstName + " " + nicknames[randInt] + " " + lastName << std::endl;
                 break;
 
             /*Display All Nicknames*/
             case 3:
-                updateNicknames();
+                for(size_t i = 0; i < nicknames.size(); i++) //TEST THIS FOR-LOOP MORE BEFORE MOVING ON
+                {
+                    std::cout << firstName + " " + nicknames[i] + " " + lastName << std::endl;
+                }
                 break;
 
             /*Add a Nickname*/
             case 4:
+                addNickname(nicknames);
                 break;
                 
             /*Remove a Nickname*/
@@ -112,8 +110,9 @@ int main()
             case 6:
                 break;
             
+            /*Cath Invalid Selections*/
             default:
-                std::cout << "ERROR: Invalid Menu Selection\n";
+                std::cout << "ERROR: Invalid Menu Selection!\n";
                 break;
         }
     }
