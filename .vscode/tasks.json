@@ -1,26 +1,25 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-
-		{
-			"type": "shell",
-			"label": "g++ build",
-			"command":  "/usr/bin/g++",
-			"args": [
-				"-std=c++11",
-				"-g",
-				"*.cpp",
-				"-o",
-				"nicknameGenerator"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": ["$gcc"],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "g++ build active file",
+            "type": "shell",
+            "command":  "C:/MinGW/bin/g++.exe",
+            "args": [
+                "-g",
+                "*.cpp",
+                "-o",
+                "nicknameGenerator.exe",
+                "-I/fs-059/studuser$/Gr12/o.mahmoud5/CS30 Work/Testing Ground"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
 }

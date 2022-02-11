@@ -1,2 +1,4 @@
-Horse
-Snake
+Cat
+Dog
+Apple
+Berry

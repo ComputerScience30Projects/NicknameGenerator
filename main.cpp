@@ -3,16 +3,14 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <ctime>
 
-static int randomInt(const size_t min, const size_t max)
+static int randomInt(const size_t max)
 {
     /*Seed random number generator*/
-    std::random_device rd;
-    std::mt19937 mt(rd());
+    std::srand (time(NULL));
 
-    std::uniform_real_distribution<double> dist(min, max);
-
-    return dist(mt);
+    return std::rand() % max;
 }
 void setName(std::string &firstName, std::string &lastName)
 {
@@ -23,9 +21,7 @@ void setName(std::string &firstName, std::string &lastName)
 
     /*Set Last Name*/
     std::cout << "Please type your last name: ";
-    std::cin.ignore();
     std::getline(std::cin, lastName);
-
 
     std::cout << "Name set to " + firstName + " " + lastName << std::endl;
 }
@@ -33,21 +29,40 @@ void setName(std::string &firstName, std::string &lastName)
 void addNickname(std::vector<std::string> &nicknames)
 {   
     /*Add New Nickname*/
-    std::string text;
+    std::string name;
     std::cout << "What nickname should we add: ";
     std::cin.ignore();
-    std::getline(std::cin, text);
-    nicknames.push_back(text);
+    std::getline(std::cin, name);
+    nicknames.push_back(name);
 
     /*Update Nickname File*/
     std::ofstream nicknamesFile("nicknames.txt", std::ios_base::app);//append
-    nicknamesFile << std::endl << text;
+    nicknamesFile << std::endl << name;
 
 }
 
-void removeNickname()
+void removeNickname(std::vector<std::string> &nicknames)
 {
-    
+    /*Remove Nickname*/
+    std::string name;
+    std::cout << "What nickname should we remove: ";
+    std::cin.ignore();
+    std::getline(std::cin, name);
+    nicknames.push_back(name);
+
+    for(size_t i = 0; i < nicknames.size(); i++)
+    {
+        if (nicknames[i] == name)
+        {
+            nicknames.erase(nicknames.begin() + i);
+        }
+    }
+
+    std::ofstream nicknamesFile("nicknames.txt",std::ofstream::trunc);
+    for(size_t i = 0; i < nicknames.size(); i++)
+    {
+        nicknamesFile << nicknames[i] << std::endl;
+    }
 }
 
 
@@ -91,15 +106,15 @@ int main()
 
             /*Display a Random Nickname*/
             case 2:
-                randInt = randomInt(0, nicknames.size());
-                std::cout << std::endl << firstName << " " << nicknames[randInt] << std::endl; //ADDING << " " << lastName  breaks it
+                randInt = randomInt(nicknames.size());
+                std::cout << std::endl << firstName << " " << nicknames[randInt] << " " << lastName << std::endl; //ADDING << " " << lastName  breaks it
                 break;
 
             /*Display All Nicknames*/
             case 3:
                 for(size_t i = 0; i < nicknames.size(); i++)
                 {
-                    std::cout << firstName << " " << nicknames[i] << std::endl; //ADDING << " " << lastName 
+                    std::cout << firstName << " " << nicknames[i] << " " << lastName << std::endl; //ADDING << " " << lastName 
                 }
                 break;
 
@@ -110,6 +125,7 @@ int main()
                 
             /*Remove a Nickname*/
             case 5:
+                removeNickname(nicknames);
                 break;
 
             /*Exit*/
