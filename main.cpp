@@ -10,7 +10,7 @@ static int randomInt(const size_t min, const size_t max)
     std::random_device rd;
     std::mt19937 mt(rd());
 
-    std::uniform_real_distribution<double> dist(min, max + 1);
+    std::uniform_real_distribution<double> dist(min, max);
 
     return dist(mt);
 }
@@ -23,6 +23,7 @@ void setName(std::string &firstName, std::string &lastName)
 
     /*Set Last Name*/
     std::cout << "Please type your last name: ";
+    std::cin.ignore();
     std::getline(std::cin, lastName);
 
 
@@ -52,6 +53,7 @@ void removeNickname()
 
 int main()
 {
+    /* Variables */
     size_t choice;
 
     std::string firstName = "John";
@@ -90,14 +92,14 @@ int main()
             /*Display a Random Nickname*/
             case 2:
                 randInt = randomInt(0, nicknames.size());
-                std::cout << std::endl << firstName + " " + nicknames[randInt] + " " + lastName << std::endl;
+                std::cout << std::endl << firstName << " " << nicknames[randInt] << std::endl; //ADDING << " " << lastName  breaks it
                 break;
 
             /*Display All Nicknames*/
             case 3:
-                for(size_t i = 0; i < nicknames.size(); i++) //TEST THIS FOR-LOOP MORE BEFORE MOVING ON
+                for(size_t i = 0; i < nicknames.size(); i++)
                 {
-                    std::cout << firstName + " " + nicknames[i] + " " + lastName << std::endl;
+                    std::cout << firstName << " " << nicknames[i] << std::endl; //ADDING << " " << lastName 
                 }
                 break;
 
